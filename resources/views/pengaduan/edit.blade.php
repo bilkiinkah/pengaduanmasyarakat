@@ -9,30 +9,34 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
+
+    <form action="{{route ('pengaduan.update', [$pengaduan->id])}}" method="POST"> 
+      @csrf 
+      @method('put')
       <div class="card-body">
         <div class="form-group">
             <label for="">Nama Pelapor</label>
-            <input type="text" name="nama" id="tanggal" value="{{ $pengaduans->user->nama }}" disabled>
+            <input type="text" name="tanggal" id="tanggal" value="{{ $pengaduan->users_id}}" required>
           </div>
           <div class="form-group">
           <label for="">Tanggal Pengaduan</label>
-          <input type="text" name="tanggal" id="tanggal" value="{{ $pengaduans->tgl_pengaduan }}" disabled>
+          <input type="text" name="tanggal" id="tanggal" value="{{ $pengaduan->tgl_pengaduan }}" required>
         </div>
         <div class="form-group">
             <label for="Alamat">Isi Laporan</label>
             <textarea 
               class="form-control" 
               name="isi_laporan" rows="5" 
-              id="isi_laporan" placeholder="isi_laporan">{{ $pengaduans->isi_laporan }}</textarea>
+              id="isi_laporan" placeholder="isi_laporan">{{ $pengaduan->isi_laporan }}</textarea>
           </div>
-          
           <div class="form-group" >
-            <label for="foto" class="form-label">Foto</label>
-            <img src="{{ url('storage/' . $pengaduans->foto) }}" alt="{{ $pengaduans->foto }}" srcset="">
+            <label for="formFile" class="form-label">Foto</label>
+            <img src="{{ url('storage/' . $pengaduan->foto) }}" alt="" srcset="">
           </div>
-         
+
           <div class="card-footer">
-           <a href="/pengaduan" calss="btn btn-secondary ml-3" style="float:left;">Back</a>
+           <button type= "submit" class="btn btn-primary" style="float:right">Save</button>
+           <a href="/pengaduan" class="btn btn-secondary ml-3" style="float:left;">Back</a>
       </div>
     </form>
   </div>

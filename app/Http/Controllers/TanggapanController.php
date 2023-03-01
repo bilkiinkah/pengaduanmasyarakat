@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tanggapan;
+use App\Models\{
+    Tanggapan,
+    Pengaduan,
+};
 use Illuminate\Http\Request;
 
 class TanggapanController extends Controller
@@ -22,9 +25,11 @@ class TanggapanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Pengaduan $pengaduan)
     {
         //
+        $pengaduans = Pengaduan::find($pengaduan->id);
+        return view('tanggapan.create', compact('pengaduans'));
     }
 
     /**
@@ -36,6 +41,27 @@ class TanggapanController extends Controller
     public function store(Request $request)
     {
         //
+        //'pengaduans_id',
+        //'users_id',
+        //'tgl_tanggapan',
+        //'tanggapan',
+        //$request->validate([
+          //  'tanggapan' => 'required',
+            //'status' => 'required',
+        //]);
+
+        $tanggapan = new Tanggapan();
+        $tanggapan->pengaduans_id   = $pengaduan->id;
+        $tanggapan->users_id        = Auth::user()->id;
+        $tanggapan->tgl_tanggapan   = Carbon::now()->format('Y-m-d');
+        $tanggapan->tanggapan       = $request->tanggapan;
+        $tanggapan->save();
+
+        DB::table('pengaduans')
+            ->where('id', $pengaduan->id)
+            ->update(['status' => $request->status]);
+
+        return redirect('/pengaduan');
     }
 
     /**

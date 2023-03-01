@@ -19,15 +19,15 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $data = request()->validate([
-            'name' => 'required|min:3|max:25',
+            'nama' => 'required|min:3|max:25',
             'username' => 'required|unique:users,username',
-            'password' => 'required|min:8',
+            'password' => 'required|min:4',
             'tlp'     => 'required|numeric',
         ],
         [
-            'name.required' => 'nama tidak boleh kosong',
-            'name.min' => 'nama minimal 3 karakter',
-            'name.max' => 'nama maksimal 25 karakter',
+            'nama.required' => 'nama tidak boleh kosong',
+            'nama.min' => 'nama minimal 3 karakter',
+            'nama.max' => 'nama maksimal 25 karakter',
             'username.required'     => 'username tidak boleh kosong',
             'username.unique' => 'username sudah terdaftar',
             'password.required' => 'password tidak boleh kosong',
@@ -37,7 +37,7 @@ class RegisterController extends Controller
         ]);
 
             User::create([
-               'name' => Str::camel($data['name']),
+               'nama' => Str::camel($data['nama']),
                'username' => Str::lower($data['username']),
                'password' => bcrypt($data['password']),
                'level' => 'masyarakat',

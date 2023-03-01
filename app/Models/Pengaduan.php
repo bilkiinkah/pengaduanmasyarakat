@@ -15,11 +15,11 @@ class Pengaduan extends Model
 
     public function user()
     {
-        return $this->belongsTo('App/Models/User', 'users_id', 'id');
+        return $this->belongsTo('App\Models\User', 'users_id', 'id');
     }
 
     public function tanggapan()
     {
-        return $this->belongsTo('App\Models\Tanggapan', 'id', 'pengaduans_id');
+        return $this->hasMany('App\Models\Tanggapan', 'id', 'pengaduans_id');
     }
 }

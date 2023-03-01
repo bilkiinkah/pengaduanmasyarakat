@@ -6,7 +6,11 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TanggapanController;
 
+
+
+    
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,23 +26,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth', 'level:masyarakat'])->group(function () {
+// pengaduan
+Route::middleware(['auth', 'level:masyarakat,admin,petugas'])->group(function () {
 Route::resource('pengaduan', PengaduanController::class);
 });
+Route::get('pengaduan/{pengaduan}/tanggapan', [TanggapanController::class, 'create'])->name('tanggapan.create');
+Route::post('pengaduan/{pengaduan}', [TanggapanController::class, 'store'])->name('tanggapan.store');
 
+// login
 Route::get('login', [LoginController::class, 'view'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'proses'])->name('login.proses')->middleware('guest');
 
-// Route::get('dashboard/admin', [Dashboard::class, 'admin'])->name('dashboard.admin')->middleware('auth');
-// Route::middleware(['auth', 'level:masyarakat'])->group(function (){
+// dashboard
 Route::get('dashboard/admin', [Dashboard::class, 'admin'])->name('dashboard.admin')->middleware('auth');
 Route::get('/dashboard/petugas', [Dashboard::class, 'petugas'])->name('dashboard.petugas')->middleware('auth');
 Route::get('/dashboard/masyarakat', [Dashboard::class, 'masyarakat'])->name('dashboard.masyarakat')->middleware('auth');
-// });
 
 
+// logout
 Route::get('logout', [LoginController::class, 'logout'])->name('logout-petugas');
 
+// register
 Route::get('register', [RegisterController::class, 'view'])->name('register')->middleware(('guest'));
 Route::post('register', [RegisterController::class, 'store'])->name('register.store')->middleware(( 'guest'));
 

@@ -28,7 +28,10 @@
         @csrf
         <div class="input-group mb-3">
           <input type="username" name="username" class="from-control placeholder="Username">
-          <div class="input-group-append">
+          <div class="input-group-append"><div class="form-group" >
+            <label for="formFile" class="form-label"></label>
+            
+          </div>
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
@@ -63,10 +66,10 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
+        <a href="forgot-password.html">Lupa Password</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="register.html" class="text-center">Register</a>
       </p>
     </div>
     <!-- /.login-card-body -->
