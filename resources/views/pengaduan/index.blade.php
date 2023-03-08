@@ -38,17 +38,22 @@
               <form action="{{ route('pengaduan.destroy', $item->id) }}" method="POST">
                 @if (auth()->user()->level == 'masyarakat')
                   @if ($item->status == '0')
-                      <a class="btn btn-primary"  href="/pengaduan/{{ $item->id }}/">Detail</a>
+                      <a class="btn btn-primary"  href="pengaduan/{{ $item->id }}">Detail</a>
                       <a class="btn btn-warning" href="{{ route('pengaduan.edit',  $item->id) }}">Edit</a>
                       @csrf
                       @method('DELETE')
                       <input type="submit" Class="btn btn-danger" value="Delete">
                     @else
-                      <a class="btn btn-primary"  href="pengaduan/">Detail</a>
+                      <a class="btn btn-primary"  href="pengaduan/{{ $item->id }}">Detail</a>
                     @endif
                 @else
-                  <a class="btn btn-primary"  href="pengaduan/">Detail</a>
+                  <a class="btn btn-primary"  href="/pengaduan/{{ $item->id }}/">Detail</a>
+                  @if ($item->status == 'selesai')
+                  <a class="btn btn-secondary" href="/user">Cetak</a>
+
+                  @else
                   <a class="btn btn-secondary"  href="{{ route('tanggapan.create', $item->id) }}">Tanggapan</a>
+                @endif
                 @endif
                 </form>
               </td>

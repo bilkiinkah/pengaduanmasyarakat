@@ -28,13 +28,13 @@
           
           <div class="form-group" >
             <label for="foto" class="form-label">Foto</label>
-            <img src="{{ url('storage/' . $pengaduans->foto) }}" alt="{{ $pengaduans->foto }}" srcset="">
+            <img width="100%" height="100%" src="{{ url('storage/' . $pengaduans->foto) }}" alt="{{ $pengaduans->foto }}" srcset="">
           </div>
+        </form>
          
           <div class="card-footer">
-           <a href="/pengaduan" calss="btn btn-secondary ml-3" style="float:left;">Back</a>
+           <a href="/pengaduan" class="btn btn-secondary ml-3" style="float:left;">Back</a>
       </div>
-    </form>
   </div>
 </div>
 <!-- Optional JavaScript; choose one of the two! -->

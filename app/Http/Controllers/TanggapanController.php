@@ -7,6 +7,9 @@ use App\Models\{
     Pengaduan,
 };
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class TanggapanController extends Controller
 {
@@ -38,7 +41,7 @@ class TanggapanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, pengaduan $pengaduan, tanggapan $tanggapan)
     {
         //
         //'pengaduans_id',
@@ -52,7 +55,7 @@ class TanggapanController extends Controller
 
         $tanggapan = new Tanggapan();
         $tanggapan->pengaduans_id   = $pengaduan->id;
-        $tanggapan->users_id        = Auth::user()->id;
+        $tanggapan->user_id        = Auth::user()->id;
         $tanggapan->tgl_tanggapan   = Carbon::now()->format('Y-m-d');
         $tanggapan->tanggapan       = $request->tanggapan;
         $tanggapan->save();

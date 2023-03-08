@@ -60,6 +60,7 @@ class PengaduanController extends Controller
         
 
         $path = $request->file('foto')->store('/img');
+
         
         Pengaduan::create([
             'users_id' => Auth::user()->id,
@@ -111,8 +112,8 @@ class PengaduanController extends Controller
     public function update(Request $request, Pengaduan $pengaduan)
     {
         //
-        $request->update([
-            'tgl_pengaduan' => $request->tgl_pengaduan,
+        $pengaduan->update([
+            
             'isi_laporan' => $request->isi_laporan,
         ]);
         return redirect ('/pengaduan');

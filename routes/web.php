@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TanggapanController;
+use App\Http\Controllers\UserController;
+
 
 
 
@@ -52,5 +54,6 @@ Route::post('register', [RegisterController::class, 'store'])->name('register.st
 
 Route::view('error/403', 'error.403' )->name('error.403');
 
-
+Route::get('user', [UserController::class, 'index']);
+Route::get('generatepdf', [UserController::class, 'generatepdf'])->name('user.pdf');
 
